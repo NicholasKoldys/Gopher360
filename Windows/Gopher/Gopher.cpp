@@ -265,8 +265,17 @@ void Gopher::loop()
   setXboxClickState(CONFIG_SPEED_CHANGE);
   if (_xboxClickIsDown[CONFIG_SPEED_CHANGE])
   {
+    /*
     const int CHANGE_SPEED_VIBRATION_INTENSITY = 65000;   // Speed of the vibration motors when changing cursor speed.
     const int CHANGE_SPEED_VIBRATION_DURATION = 450;      // Duration of the cursor speed change vibration in milliseconds.
+    */
+    
+    /* Fork change by Nicholas Koldys */
+    
+    const int CHANGE_SPEED_VIBRATION_INTENSITY = 30000;   // Speed of the vibration motors when changing cursor speed.
+    const int CHANGE_SPEED_VIBRATION_DURATION = 250;      // Duration of the cursor speed change vibration in milliseconds.
+  
+    /* End Fork change */
 
     speed_idx++;
     if (speed_idx >= speeds.size())
@@ -277,7 +286,8 @@ void Gopher::loop()
     printf("Setting speed to %f (%s)...\n", speed, speed_names[speed_idx].c_str());
     pulseVibrate(CHANGE_SPEED_VIBRATION_DURATION, CHANGE_SPEED_VIBRATION_INTENSITY, CHANGE_SPEED_VIBRATION_INTENSITY);
   }
-
+  
+  
   // Update all controller keys.
   handleTriggers(GAMEPAD_TRIGGER_LEFT, GAMEPAD_TRIGGER_RIGHT);
   if (GAMEPAD_DPAD_UP)
